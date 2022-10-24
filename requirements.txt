@@ -1,0 +1,2 @@
+openshift
+ovirt-engine-sdk-python
