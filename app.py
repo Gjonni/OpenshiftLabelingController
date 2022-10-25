@@ -5,9 +5,8 @@ from library.openshift import *
 
 
 def main():
-    t1 = threading.Thread(target=watch_nodes, args=(("WatchNodes", "Node")), daemon=True, name='WatchNodes').start()
-    t2 = threading.Thread(target=get_nodes, args=(("GetNodes", "Node")), daemon=True, name='GetNodes').start()
-    t1.join()
+    threading.Thread(target=watch_nodes, args=(("WatchNodes", "Node")), daemon=True, name='WatchNodes').start()
+    threading.Thread(target=get_nodes, args=(("GetNodes", "Node")), daemon=True, name='GetNodes').start()
 #    Logging.logger.info(f"Inizio la verifica degli host fisici di RHV su sui si trovano i nodi Openshift")
 #    _thread.start_new_thread(watch_nodes, ("WatchNodes", 2, "Node"))
 
