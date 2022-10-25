@@ -12,7 +12,7 @@ import time
 
 def main():
     Logging.logger.info(f"Verifico....")
-    _thread.start_new_thread(watch_nodes, ("Nodes-Thread", 2, "Node"))
+    _thread.start_new_thread(watch_nodes, ("WatchNodes", 2, "Node"))
 
     while 1:
         pass
