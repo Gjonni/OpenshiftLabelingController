@@ -37,7 +37,7 @@ def add_label(kind, name, host, datacenter):
 
 
 
-def watch_nodes(kind):
+def watch_nodes(ThreadName,kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
         host = get_rhv_hosts( node['object'].metadata.name )
@@ -49,7 +49,7 @@ def watch_nodes(kind):
         add_label( kind, node["object"].metadata.name, host, datacenter )
 
 
-def get_nodes(kind):
+def get_nodes(ThreadName,kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     nodes_list = v1_ocp.get()
     for node in nodes_list.items:
