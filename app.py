@@ -5,8 +5,12 @@ from library.openshift import *
 
 
 def main():
-    threading.Thread(target=watch_nodes, args=("Node"), daemon=True, name='WatchNodes').start().join()
-    threading.Thread(target=get_nodes, args=("Node"), daemon=True, name='GetNodes').start().join()
+    t1 = threading.Thread(target=watch_nodes, args=("Node"), daemon=True, name='WatchNodes')
+    t2 = threading.Thread(target=get_nodes, args=("Node"), daemon=True, name='GetNodes')
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
 
 
 if __name__ == "__main__":
