@@ -46,12 +46,11 @@ def watch_nodes(ThreadName, delay, kind):
         label( kind, node["object"].metadata.name, get_hosts(node["object"].metadata.name) )
     Logging.logger.debug(f"Ogni nodo è stato correttamente identificato e ho aggiunto la label rhv=nodo fisico")
 
-
 def get_nodes(ThreadName, delay, kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     nodes_list = v1_ocp.get()
     for node in nodes_list.items:
-        Logging.logger.debug(f"{ThreadName } -  { node['object'].metadata.name } on { get_hosts(node['object'].metadata.name) } ")
+        Logging.logger.debug(f"{ThreadName } -  { node.metadata.name } on { get_hosts(node.metadata.name) } ")
         label( kind, node.metadata.name, get_hosts(node.metadata.name) )
     Logging.logger.debug(f"Ogni nodo è stato correttamente identificato e ho aggiunto la label rhv=nodo fisico")
 
