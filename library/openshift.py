@@ -21,7 +21,7 @@ k8s_client = kubernetes.client.ApiClient()
 dyn_client = DynamicClient(k8s_client)
 
 
-def label(kind, name, host, datacenter):
+def add_label(kind, name, host, datacenter):
     resources = dyn_client.resources.get(api_version="v1", kind=kind)
     body = {
         "kind": kind,
@@ -40,13 +40,13 @@ def label(kind, name, host, datacenter):
 def watch_nodes(ThreadName, delay, kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
-        host = get_hosts(node.metadata.name)
+        host = get_hosts( node['object'].metadata.name )
         Logging.logger.debug(f"{ ThreadName } -  { node['object'].metadata.name } on { get_hosts(node['object'].metadata.name) } ")
-        if "bernina" in get_hosts(node.metadata.name):
+        if "bernina" in host:
             datacenter = "Bernina"
-        if "caracciolo" in get_hosts(node.metadata.name):
+        if "caracciolo" in host:
             datacenter = "Caraccialo"       
-        label( kind, node["object"].metadata.name, host, datacenter )
+        add_label( kind, node["object"].metadata.name, host, datacenter )
     Logging.logger.debug(f"Ogni nodo è stato correttamente identificato e ho aggiunto la label rhv=nodo fisico")
 
 
@@ -56,11 +56,11 @@ def get_nodes(ThreadName, delay, kind):
     for node in nodes_list.items:
         host = get_hosts(node.metadata.name)
         Logging.logger.debug(f"{ThreadName } -  { node.metadata.name } on { host } ")
-        if "bernina" in get_hosts(node.metadata.name):
+        if "bernina" in host:
             datacenter = "Bernina"
-        if "caracciolo" in get_hosts(node.metadata.name):
+        if "caracciolo" in host:
             datacenter = "Caraccialo"
-        label( kind, node.metadata.name, host, datacenter )
+        add_label( kind, node.metadata.name, host, datacenter )
     Logging.logger.debug(f"Ogni nodo è stato correttamente identificato e ho aggiunto la label rhv=nodo fisico")
 
 
