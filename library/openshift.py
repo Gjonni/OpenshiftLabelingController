@@ -61,8 +61,8 @@ def get_nodes(ThreadName, kind):
         if "caracciolo" in host:
             datacenter = "Caraccialo"
         add_label( kind, node.metadata.name, host, datacenter )
-    Logging.logger.debug(f"Ogni nodo è stato correttamente identificato e ho aggiunto la label rhv=nodo fisico")
     while True:
+        Logging.logger.debug(f"Verifica ogni 10 secondi completata correttamente")
         time.sleep(10)
 
 
