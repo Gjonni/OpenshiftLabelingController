@@ -37,7 +37,7 @@ def add_label(kind, name, host, datacenter):
 
 
 
-def watch_nodes(kind):
+def watch_nodes(ThreadName,kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
         host = get_rhv_hosts( node['object'].metadata.name )
@@ -45,11 +45,11 @@ def watch_nodes(kind):
             datacenter = "Bernina"
         if "caracciolo" in host:
             datacenter = "Caraccialo"     
-        Logging.logger.debug(f"{ node['object'].metadata.name } on { host } - {datacenter} ")
+        Logging.logger.debug(f" { ThreadName } - { node['object'].metadata.name } on { host } - {datacenter} ")
         add_label( kind, node["object"].metadata.name, host, datacenter )
 
 
-def get_nodes(kind):
+def get_nodes(ThreadName,kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     nodes_list = v1_ocp.get()
     for node in nodes_list.items:
@@ -58,7 +58,7 @@ def get_nodes(kind):
             datacenter = "Bernina"
         if "caracciolo" in host:
             datacenter = "Caraccialo"
-        Logging.logger.debug(f"{ node.metadata.name } on { host } - { datacenter } ")
+        Logging.logger.debug(f" { ThreadName } - { node.metadata.name } on { host } - { datacenter } ")
         add_label( kind, node.metadata.name, host, datacenter )
     while True:
         Logging.logger.debug(f"Verifica ogni 10 secondi completata correttamente")
