@@ -1,12 +1,13 @@
 import ovirtsdk4 as sdk
 import os
+from library.ValidationEnviroment import *
 
 connection = sdk.Connection(
-    url= os.environ.get("ENGINE_URL"),
-    username= os.environ.get("USERNAME"),
-    password= os.environ.get("PASSWORD"),
-    insecure= True,
-    debug= False
+    url = ValidationEnviroment().engineUrl,
+    username = ValidationEnviroment().username,
+    password = ValidationEnviroment().password,
+    insecure = True,
+    debug = False
 )
 
 

@@ -3,7 +3,6 @@ import threading
 from library.Logging import *
 from library.openshift import *
 
-
 def main():
     t1 = threading.Thread(target=watch_nodes, args=("WatchNodes", "Node"), daemon=True, name='WatchNodes')
     t2 = threading.Thread(target=get_nodes, args=("GetNodes", "Node"), daemon=True, name='GetNodes')
@@ -13,7 +12,7 @@ def main():
     t2.join()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()
 
 

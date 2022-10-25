@@ -4,6 +4,8 @@ import urllib3
 import os
 from library.Logging import Logging
 from library.rhv import *
+from library.ValidationEnviroment import *
+
 import time
 
 urllib3.disable_warnings()
@@ -40,11 +42,12 @@ def add_label(kind, name, host, datacenter):
 def watch_nodes(ThreadName,kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
+        if not ValidationEnviroment():
+            continue
         host = get_rhv_hosts( node['object'].metadata.name )
-        if "bernina" in host:
-            datacenter = "Bernina"
-        if "caracciolo" in host:
-            datacenter = "Caraccialo"     
+        for i in ValidationEnviroment().datacenter:
+            if i in host:
+                datacenter = i
         Logging.logger.debug(f" { ThreadName } - { node['object'].metadata.name } on { host } - {datacenter} ")
         add_label( kind, node["object"].metadata.name, host, datacenter )
 
@@ -54,10 +57,12 @@ def get_nodes(ThreadName,kind):
     nodes_list = v1_ocp.get()
     for node in nodes_list.items:
         host = get_rhv_hosts( node.metadata.name )
-        if "bernina" in host:
-            datacenter = "Bernina"
-        if "caracciolo" in host:
-            datacenter = "Caraccialo"
+        if not ValidationEnviroment():
+            continue
+        
+        for i in ValidationEnviroment().datacenter:
+            if i in host:
+                datacenter = i
         Logging.logger.debug(f" { ThreadName } - { node.metadata.name } on { host } - { datacenter } ")
         add_label( kind, node.metadata.name, host, datacenter )
     while True:
