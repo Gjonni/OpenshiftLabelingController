@@ -8,7 +8,7 @@ import time
 
 def main():
     scheduler = sched.scheduler(time.time, time.sleep)
-    scheduler.enter(3, 1, watch_nodes, ("WatchNodes", 2, "Node"))
+    scheduler.enter(3, 1, watch_nodes, ("WatchNodes", "Node"))
     scheduler.run()
 #    Logging.logger.info(f"Inizio la verifica degli host fisici di RHV su sui si trovano i nodi Openshift")
 #    _thread.start_new_thread(watch_nodes, ("WatchNodes", 2, "Node"))
