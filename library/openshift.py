@@ -40,7 +40,7 @@ def label(kind, name, host):
 
 
 
-def ocp(ThreadName, delay, kind):
+def watch_nodes(ThreadName, delay, kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
         Logging.logger.info(f"{ThreadName } -  { node['object'].metadata.name } on { get_hosts(node['object'].metadata.name) } ")

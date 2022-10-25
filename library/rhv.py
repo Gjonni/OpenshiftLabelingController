@@ -4,9 +4,9 @@ import os
 connection = sdk.Connection(
     url= os.environ.get("ENGINE_URL"),
     username= os.environ.get("USERNAME"),
-    password= os.environ.get("PASSWORD")
-    insecure=True,
-    debug=False
+    password= os.environ.get("PASSWORD"),
+    insecure= True,
+    debug= False
 )
 
 
