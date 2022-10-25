@@ -41,7 +41,7 @@ def watch_nodes(ThreadName, kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
         host = get_rhv_hosts( node['object'].metadata.name )
-        Logging.logger.debug(f"{ ThreadName } -  { node['object'].metadata.name } on host } ")
+        Logging.logger.debug(f"{ ThreadName } -  { node['object'].metadata.name } on { host } ")
         if "bernina" in host:
             datacenter = "Bernina"
         if "caracciolo" in host:
