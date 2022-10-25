@@ -11,8 +11,8 @@ def main():
     t2.start()
     t1.join()
     t2.join()
-
-
+    print("Main thread name: {}".format(threading.main_thread().name))
+    Logging.logger.debug(f"Main thread name: { threading.main_thread().name }")
 if __name__ == "__main__":
     main()
 
