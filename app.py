@@ -14,8 +14,6 @@ def main():
     Logging.logger.info(f"Verifico....")
     _thread.start_new_thread(watch_nodes, ("Nodes-Thread", 2, "Node"))
 
-    schedule.every().second.do(get_nodes)
-
     while 1:
         pass
 
