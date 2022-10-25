@@ -10,7 +10,7 @@ connection = sdk.Connection(
 )
 
 
-def get_hosts(vmname):
+def get_rhv_hosts(vmname):
     vms_service = connection.system_service().vms_service()
     for vm in vms_service.list():
         if vm.name == vmname:
