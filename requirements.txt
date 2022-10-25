@@ -1,3 +1,2 @@
 openshift
 ovirt-engine-sdk-python
-schedule

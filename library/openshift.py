@@ -37,11 +37,11 @@ def add_label(kind, name, host, datacenter):
 
 
 
-def watch_nodes(ThreadName, delay, kind):
+def watch_nodes(ThreadName, kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
-        host = get_hosts( node['object'].metadata.name )
-        Logging.logger.debug(f"{ ThreadName } -  { node['object'].metadata.name } on { get_hosts(node['object'].metadata.name) } ")
+        host = get_rhv_hosts( node['object'].metadata.name )
+        Logging.logger.debug(f"{ ThreadName } -  { node['object'].metadata.name } on host } ")
         if "bernina" in host:
             datacenter = "Bernina"
         if "caracciolo" in host:
@@ -50,11 +50,11 @@ def watch_nodes(ThreadName, delay, kind):
     Logging.logger.debug(f"Ogni nodo è stato correttamente identificato e ho aggiunto la label rhv=nodo fisico")
 
 
-def get_nodes(ThreadName, delay, kind):
+def get_nodes(ThreadName, kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     nodes_list = v1_ocp.get()
     for node in nodes_list.items:
-        host = get_hosts(node.metadata.name)
+        host = get_rhv_hosts( node.metadata.name )
         Logging.logger.debug(f"{ThreadName } -  { node.metadata.name } on { host } ")
         if "bernina" in host:
             datacenter = "Bernina"
