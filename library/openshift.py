@@ -4,7 +4,7 @@ import urllib3
 import os
 from library.Logging import Logging
 from library.rhv import *
-
+import time
 
 urllib3.disable_warnings()
 if "OPENSHIFT_BUILD_NAME" in os.environ:
@@ -62,6 +62,8 @@ def get_nodes(ThreadName, kind):
             datacenter = "Caraccialo"
         add_label( kind, node.metadata.name, host, datacenter )
     Logging.logger.debug(f"Ogni nodo è stato correttamente identificato e ho aggiunto la label rhv=nodo fisico")
+    while True:
+        time.sleep(10)
 
 
 
