@@ -5,19 +5,14 @@ import os
 from library.Logging import Logging
 from library.rhv import *
 from library.ValidationEnviroment import *
-
 import time
 
-urllib3.disable_warnings()
-if "OPENSHIFT_BUILD_NAME" in os.environ:
-    kubernetes.config.load_incluster_config()
-    file_namespace = open("/run/secrets/kubernetes.io/serviceaccount/namespace", "r")
-    if file_namespace.mode == "r":
-        namespace = file_namespace.read()
-        print(f"namespace: { namespace }")
-else:
-    kubernetes.config.load_kube_config()
 
+kubernetes.config.load_incluster_config()
+file_namespace = open("/run/secrets/kubernetes.io/serviceaccount/namespace", "r")
+if file_namespace.mode == "r":
+    namespace = file_namespace.read()
+    print(f"namespace: { namespace }")
 
 k8s_client = kubernetes.client.ApiClient()
 dyn_client = DynamicClient(k8s_client)
