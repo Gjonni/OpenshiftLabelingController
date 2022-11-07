@@ -1,32 +1,18 @@
-# This workflow builds a container image of a java
-# application using the source to image build strategy,
-# and pushes the image to quay.io.
-
-steps:
-  env:
-    IMAGE_NAME: OpenshiftLabelingController
-    TAGS: v1 ${{ github.sha }}
-
-  - name: Checkout
-    uses: actions/checkout@v2
-
-  # Setup S2i and Build container image
-  - name: Setup and Build
-    id: build_image
-    uses: redhat-actions/s2i-build@v2
-    with:
-      path_context: '.'
-      # Builder image for a java project
-      builder_image: 'registry.access.redhat.com/ubi8/python-39:1-73.1665597535'
-      image: ${{ env.IMAGE_NAME }}
-      tags: ${{ env.TAGS }}
-
-  # Push Image to Quay registry
-  - name: Push To Quay Action
-    uses: redhat-actions/push-to-registry@v2
-    with:
-      image: ${{ steps.build_image.outputs.image }}
-      tags: ${{ steps.build_image.outputs.tags }}
-      registry: quay.io/${{ secrets.QUAY_USERNAME }}
-      username: ${{ secrets.QUAY_USERNAME }}
-      password: ${{ secrets.QUAY_PASSWORD }}
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
