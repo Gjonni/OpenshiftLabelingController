@@ -10,6 +10,10 @@ import schedule
 #else:
 #    raise ValueError("Don't run on openshift or Kubernetes")
 
+def run_threaded(job_func,job,kind):
+    job_thread = threading.Thread(target=job_func, args=(job, kind), daemon=True, name=job))
+    job_thread.start()
+    job_thread.join()
 
 def main():
     #t1 = threading.Thread(target=watch_nodes, args=("WatchNodes", "Node"), daemon=True, name='WatchNodes')
@@ -18,7 +22,7 @@ def main():
     #t2 = threading.Thread(target=get_nodes, args=("GetNodes", "Node"), daemon=True, name='GetNodes')
     #t2.start()
     #t2.join()
-    schedule.every(5).seconds.do(get_nodes, "GetNodes", "Node")
+    schedule.every(5).seconds.do(run_threaded, "GetNodes", "Node")
 
     while True:
         schedule.run_pending()
