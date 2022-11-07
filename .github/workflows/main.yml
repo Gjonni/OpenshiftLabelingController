@@ -31,3 +31,5 @@ jobs:
           registry: quay.io/${{ secrets.QUAY_USERNAME }}
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
+          
+          
