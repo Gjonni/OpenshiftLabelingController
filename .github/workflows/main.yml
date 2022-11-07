@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: OpenshiftLabelingController
-      TAGS: v1 ${{ github.sha }}
+      
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
           # Builder image for a java project
           builder_image: 'registry.access.redhat.com/ubi8/python-39:1-73.1665597535'
           image: ${{ env.IMAGE_NAME }}
-          tags: ${{ env.TAGS }}
+          tags: latest
 
       # Push Image to Quay registry
       - name: Push To Quay Action
