@@ -2,7 +2,7 @@ SHELL=/bin/bash
 ### SOLO TESTING NON SO SE FUNGE
 
 NAMESPACE = gfilice-test
-NAME = rhv-label
+NAME = OpenshiftLabelingController
 TZ = Europe/Rome
 ENGINE_URL = ""
 ##ENGINE_URL = ""
