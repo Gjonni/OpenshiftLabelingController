@@ -43,7 +43,7 @@ def watch_nodes(ThreadName,kind):
         for i in ValidationEnviroment().datacenter:
             if i in host:
                 datacenter = i
-        Logging.logger.debug(f" { ThreadName } - { node['object'].metadata.name } on { host } - {datacenter} ")
+        Logging.logger.info(f" { ThreadName } - { node['object'].metadata.name } on { host } - {datacenter} ")
         add_label( kind, node["object"].metadata.name, host, datacenter )
 
 
@@ -54,15 +54,12 @@ def get_nodes(ThreadName,kind):
         host = get_rhv_hosts( node.metadata.name )
         if not ValidationEnviroment():
             continue
-        
+
         for i in ValidationEnviroment().datacenter:
             if i in host:
                 datacenter = i
-        Logging.logger.debug(f" { ThreadName } - { node.metadata.name } on { host } - { datacenter } ")
+        Logging.logger.info(f" { ThreadName } - { node.metadata.name } on { host } - { datacenter } ")
         add_label( kind, node.metadata.name, host, datacenter )
     while True:
         Logging.logger.debug(f"Verifica ogni 10 secondi completata correttamente")
         time.sleep(10)
-
-
-
