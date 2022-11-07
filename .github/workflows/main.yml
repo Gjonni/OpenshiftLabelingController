@@ -19,7 +19,7 @@ jobs:
           # Builder image for a java project
           builder_image: 'registry.access.redhat.com/ubi8/python-39:1-73.1665597535'
           image: ${{ env.IMAGE_NAME }}
-          tags: ${{ env.TAGS }}
+          tags: ${{ env.TAGS }} latest
 
 
       # Push Image to Quay registry
@@ -27,7 +27,7 @@ jobs:
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build_image.outputs.image }}
-          tags: ${{ steps.build_image.outputs.tags }} latest
+          tags: ${{ steps.build_image.outputs.tags }}
           registry: quay.io/${{ secrets.QUAY_USERNAME }}
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
