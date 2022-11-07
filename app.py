@@ -14,17 +14,11 @@ def run_threaded(job,kind):
     print(job_func)
     print(job)
     print(kind)
-    job_thread = threading.Thread(target=job_func, args=(job, kind), daemon=True, name=job)
+    job_thread = threading.Thread(target=job, args=(job, kind), daemon=True, name=job)
     job_thread.start()
     job_thread.join()
 
 def main():
-    #t1 = threading.Thread(target=watch_nodes, args=("WatchNodes", "Node"), daemon=True, name='WatchNodes')
-    #t1.start()
-    #t1.join()
-    #t2 = threading.Thread(target=get_nodes, args=("GetNodes", "Node"), daemon=True, name='GetNodes')
-    #t2.start()
-    #t2.join()
     schedule.every(5).seconds.do(run_threaded, "get_nodes", "Node")
 
     while True:
