@@ -59,5 +59,6 @@ def get_nodes(ThreadName,kind):
         Logging.logger.info(f" { ThreadName } - { node.metadata.name } on { host } - { datacenter } ")
         add_label( kind, node.metadata.name, host, datacenter )
     while True:
+        Logging.logger.info(f" { ThreadName } - { node.metadata.name } on { host } - { datacenter } ")
         Logging.logger.debug(f"Verifica ogni 10 secondi completata correttamente")
         time.sleep(10)

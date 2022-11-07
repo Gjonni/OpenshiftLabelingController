@@ -14,9 +14,9 @@ def main():
     t2.start()
     t2.join()
 
-    #t1 = threading.Thread(target=watch_nodes, args=("WatchNodes", "Node"), daemon=True, name='WatchNodes')
-    #t1.start()
-    #t1.join()
+    t1 = threading.Thread(target=watch_nodes, args=("WatchNodes", "Node"), daemon=True, name='WatchNodes')
+    t1.start()
+    t1.join()
 
 
 if __name__ == "__main__":
