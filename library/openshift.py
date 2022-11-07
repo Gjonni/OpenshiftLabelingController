@@ -32,8 +32,6 @@ def add_label(kind, name, host, datacenter):
     resources.patch(body=body)
 
 
-
-
 def watch_nodes(ThreadName,kind):
     v1_ocp = dyn_client.resources.get(api_version="v1", kind=kind)
     for node in v1_ocp.watch():
