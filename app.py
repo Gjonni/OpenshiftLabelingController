@@ -18,6 +18,7 @@ def main():
     #t2.join()
 
     SEC = os.environ.get("SEC",10)
+    print(SEC)
     schedule.every(SEC).seconds.do(get_nodes, "GetNodes", "Node")
 
     while True:
