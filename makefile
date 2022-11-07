@@ -43,7 +43,6 @@ install_k8s:
 	oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:$(NAMESPACE):$(NAME) -n $(NAMESPACE)
 
 
-
 uninstall:
 	@echo "Disinstallo Applicazione"
 	oc delete all --selector app=$(NAME) -n $(NAMESPACE)
