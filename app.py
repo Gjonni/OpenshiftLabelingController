@@ -16,7 +16,7 @@ def main():
     #t2 = threading.Thread(target=get_nodes, args=("GetNodes", "Node"), daemon=True, name='GetNodes')
     #t2.start()
     #t2.join()
-    schedule.every(10).seconds.do(get_nodes, "GetNodes", "Node")
+    schedule.every(os.environ.get("SEC")).seconds.do(get_nodes, "GetNodes", "Node")
 
     while True:
         schedule.run_pending()
