@@ -11,15 +11,12 @@ import threading
 #    raise ValueError("Don't run on openshift or Kubernetes")
 
 def run_threaded(job,kind):
-    print(job_func)
-    print(job)
-    print(kind)
     job_thread = threading.Thread(target=job, args=(job, kind), daemon=True, name=job)
     job_thread.start()
     job_thread.join()
 
 def main():
-    schedule.every(5).seconds.do(run_threaded, "get_nodes", "Node")
+    schedule.every(5).seconds.do(run_threaded, get_nodes, "Node")
 
     while True:
         schedule.run_pending()
