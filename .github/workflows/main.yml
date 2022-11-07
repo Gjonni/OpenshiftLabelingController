@@ -2,6 +2,7 @@ name: OpenshiftLabelingController
 on: [push]
 jobs:
   Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
     env:
       IMAGE_NAME: openshiftlabelingcontroller
       TAGS: ${{ github.sha }}
