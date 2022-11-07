@@ -3,10 +3,10 @@ import threading
 from library.Logging import *
 from library.openshift import *
 
-if "OPENSHIFT_BUILD_NAME" in os.environ:
-    from library.openshift import *
-else:
-    raise ValueError("Don't run on openshift or Kubernetes")
+#if "OPENSHIFT_BUILD_NAME" in os.environ:
+#    from library.openshift import *
+#else:
+#    raise ValueError("Don't run on openshift or Kubernetes")
 
 
 def main():
