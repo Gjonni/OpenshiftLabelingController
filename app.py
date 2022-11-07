@@ -2,7 +2,7 @@ import os
 import threading
 from library.Logging import *
 from library.openshift import *
-
+import schedule
 #if "OPENSHIFT_BUILD_NAME" in os.environ:
 #    from library.openshift import *
 #else:
