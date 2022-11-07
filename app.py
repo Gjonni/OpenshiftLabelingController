@@ -10,12 +10,18 @@ from library.openshift import *
 
 
 def main():
-    t1 = threading.Thread(target=watch_nodes, args=("WatchNodes", "Node"), daemon=True, name='WatchNodes')
-    t1.start()
-    t1.join()
-    t2 = threading.Thread(target=get_nodes, args=("GetNodes", "Node"), daemon=True, name='GetNodes')
-    t2.start()
-    t2.join()
+    #t1 = threading.Thread(target=watch_nodes, args=("WatchNodes", "Node"), daemon=True, name='WatchNodes')
+    #t1.start()
+    #t1.join()
+    #t2 = threading.Thread(target=get_nodes, args=("GetNodes", "Node"), daemon=True, name='GetNodes')
+    #t2.start()
+    #t2.join()
+    schedule.every(2).seconds.do(get_nodes, "GetNodes", "Node")
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
 
 if __name__ == "__main__":
     main()
