@@ -11,6 +11,9 @@ import threading
 #    raise ValueError("Don't run on openshift or Kubernetes")
 
 def run_threaded(job_func,job,kind):
+    print(job_func)
+    print(job)
+    print(kind)
     job_thread = threading.Thread(target=job_func, args=(job, kind), daemon=True, name=job)
     job_thread.start()
     job_thread.join()
