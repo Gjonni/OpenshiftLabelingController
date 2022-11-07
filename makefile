@@ -22,7 +22,7 @@ install_openshift:
 	oc create secret generic rhv-credential --from-literal ENGINE_URL=$(ENGINE_URL) --from-literal USERNAME=$(USERNAME)  --from-literal PASSWORD=$(PASSWORD)
 	@echo "Add Enviroment"
 	oc patch deployment $(NAME) -p '{"spec":{"template":{"spec":{"serviceAccount": "$(NAME)" }}}}' -n $(NAMESPACE)
-	oc set env deployment/$(NAME) TZ=$(TZ) LOGLEVEL=$(LOGLEVEL) -n $(NAMESPACE)
+	oc set env deployment/$(NAME) TZ=$(TZ) LOGLEVEL=$(LOGLEVEL) DATACENTER=$(DATACENTER) -n $(NAMESPACE)
 	oc set env --from=secret/rhv-credential deployment/$(NAME)
 	oc scale deployment/$(NAME) --replicas=1 -n $(NAMESPACE)
 	@echo "Fix Permission"
