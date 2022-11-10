@@ -16,8 +16,9 @@ jobs:
         uses: redhat-actions/s2i-build@v2
         with:
           path_context: '.'
-          # Builder image for a java project
-          builder_image: 'registry.access.redhat.com/ubi8/python-39:1-73.1665597535'
+          # Builder image for a java project+
+          builder_image: 'registry.fedoraproject.org/f35/python3'
+          # builder_image: 'registry.access.redhat.com/ubi8/python-39:1-73.1665597535'
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.TAGS }} latest
 
