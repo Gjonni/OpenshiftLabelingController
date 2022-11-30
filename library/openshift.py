@@ -16,7 +16,7 @@ if file_namespace.mode == "r":
 
 k8s_client = kubernetes.client.ApiClient()
 dyn_client = DynamicClient(k8s_client)
-
+datacenters = { "ber": "bernina" , "car": "caracciolo"}
 
 def add_label(kind, name, host, datacenter):
     resources = dyn_client.resources.get(api_version="v1", kind=kind)
@@ -55,6 +55,6 @@ def get_nodes(ThreadName,kind):
 
         for i in ValidationEnviroment().datacenter:
             if i in host:
-                datacenter = i
+                datacenter = datacenters[i]
         Logging.logger.info(f" { ThreadName } - { node.metadata.name } on { host } - { datacenter } ")
         add_label( kind, node.metadata.name, host, datacenter )
