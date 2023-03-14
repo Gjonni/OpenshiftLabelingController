@@ -29,7 +29,7 @@ jobs:
         with:
           image: ${{ steps.build_image.outputs.image }}
           tags: ${{ steps.build_image.outputs.tags }}
-          registry: quay.fclinica.it/filice/openshiftlabelingcontroller
+          registry: quay.fclinica.it/filice
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
           
