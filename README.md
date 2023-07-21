@@ -2,9 +2,8 @@
 
 
 # Docker Pull
-docker pull quay.io/giovanni_filice/openshiftlabelingcontroller:latest
-
-
+docker pull harbor.k3s.filice.eu/library/openshiftlabelingcontroller@sha256:8f7518ce103ed52e0baaa4ec2122ceef4c7add345cb7afe7eacbdef845cc6bf6
+docker pull harbor.k3s.filice.eu/library/openshiftlabelingcontroller:latest
 
 **Variabili d'ambiente**
 
